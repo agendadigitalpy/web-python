@@ -19,7 +19,7 @@ $ git clone github.com/agendadigitalpy/web-python
 - Abrir el directorio del proyecto:
 
 ```
-$ cd $YOURPROYECTPATH/web-python
+$ cd $GITPROYECTSPATH/web-python
 ```
 - Ejecutar usando:
 
