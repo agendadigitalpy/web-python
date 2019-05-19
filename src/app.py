@@ -1,9 +1,9 @@
 
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 from flask import Response
 from flask_pymongo import PyMongo
 
-app = Flask(__name__)
+app = Flask(__name__,  static_url_path='')
 
 # Estructura de datos actual.
 # p = {
@@ -15,9 +15,12 @@ app = Flask(__name__)
 #     "approved" : True
 # }
 
-
 app.config["MONGO_URI"] = "mongodb://localhost:27017/agendadigital"
 mongo = PyMongo(app)
+
+@app.route('/assets/<path:path>')
+def send_assets(path):
+        return send_from_directory('assets', path)
 
 @app.route('/')
 def index():
