@@ -1,21 +1,15 @@
 
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory
 from flask import Response
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, ASCENDING, DESCENDING
+from bson.objectid import ObjectId
+
+from bs4 import BeautifulSoup
+
 
 app = Flask(__name__,  static_url_path='')
 
-# Estructura de datos actual.
-# p = {
-#     "name" : "Matías Insaurralde",
-#     "email" : "matias@insaurral.de",
-#     "category" : 1,
-#     "title" : "Expandir modelo de evaluación del producto 7",
-#     "content" : "Hola, me parece que la forma en que se propone medir el producto 7 es poco clara.\r\n\r\nSería bueno que se revele mayor documentación sobre la implementación y se detalle la metodología del informe de progreso.\r\n\r\nSaludos",
-#     "approved" : True
-# }
-
-app.config["MONGO_URI"] = "mongodb://localhost:27017/agendadigital"
+app.config["MONGO_URI"] = "mongodb://localhost:27017/agendadigitalpy"
 mongo = PyMongo(app)
 
 @app.route('/assets/<path:path>')
@@ -26,10 +20,46 @@ def send_assets(path):
 def index():
 	return render_template('principal.html')
 	
-@app.route('/propuestas')
+
+@app.route("/propuestas/<_id>")
+def show_proposal(_id):
+    proposal = mongo.db.proposals.find_one({'_id': ObjectId(_id)})
+    return render_template("propuesta.html", proposal=proposal)
+
+@app.route('/propuestas', methods = ['GET'])
 def getProps():
-	propuestas = mongo.db.proposals.find()
-	return render_template("propuestas.html", propuestas=propuestas)
+	proposals = mongo.db.proposals.find().sort('_id', DESCENDING)
+	return render_template("propuestas.html", proposals=proposals)
+
+# TODO: validar e-mail
+@app.route('/propuestas', methods = ['POST'])
+def createProposal():
+        name = remove_html(request.form["name"])
+        email = remove_html(request.form["email"])
+        category = request.form["category"]
+        try:
+                category = int(category)
+                if category > 4:
+                        category = 0
+        except ValueError:
+                category = 0
+        title = remove_html(request.form["title"])
+        content = remove_html(request.form["content"])
+        p = {
+                'name': name,
+                'email': email,
+                'category': category,
+                'title': title,
+                'content': content,
+                'approved': True
+        }
+        mongo.db.proposals.insert(p)
+        proposals = mongo.db.proposals.find().sort('_id', DESCENDING)
+        return render_template("propuestas.html", proposals=proposals, success=True)
+
+def remove_html(s):
+        soup = BeautifulSoup(s)
+        return soup.get_text()
 
 @app.route('/conectividad')
 def getConectividad():
@@ -59,7 +89,19 @@ def getSeguimiento():
 def getSolicitudes():
 	return render_template("solicitudes.html")
 
+cats = ['General', 'Gobierno Digital', 'Economía Digital', 'Conectividad', 'Fortalecimiento Institucional']
+@app.template_filter('category_name')
+def category_name(n):
+        return cats[n]
 
+@app.template_filter('proposal_date')
+def proposal_date(i):
+        return i.generation_time.strftime('%d/%m/%y')
+
+@app.template_filter('content_filter')
+def content_filter(s):
+        s = s.replace("\n", "<br/>")
+        return s
 
 if __name__ == '__main__':
 	app.run(debug = True)
