@@ -1,15 +1,37 @@
 {% extends "layout.html" %}
 {% block body %}
-  <ul >
-  {% for p in propuestas %}
-    <li><h2>{{ p.name }}</h2>{{ p.email }}
-    <li><h4>Titulo</h4>{{ p.title }}
-    <div>
-    <li><h4>Contenido</h4>
-      <p>{{ p.content }}<p/>
-   </div>
-  {% else %}
-    <li><em>No se encontraron propuestas.</em>
-  {% endfor %}
-  </ul>
+<div id="main">
+  <div class="inner">
+
+    {% include "propuestaform.html"  %}
+	  <section>
+		  <h3>Últimas propuestas recibidas</h3>
+		  <div class="table-wrapper">
+			  <table class="alt">
+				  <thead>
+					  <tr>
+						  <th>Fecha</th>
+						  <th>Componente</th>
+						  <th>Título</th>
+						  <th>Contenido</th>
+						  <th></th>
+					  </tr>
+				  </thead>
+				  <tbody>
+					  {% for p in propuestas %}
+					  <tr>
+						  <td>fecha</td>
+						  <td>{{ p.category }}</td>
+						  <td>{{ p.title }}</td>
+						  <td>{{ p.content }}</td>
+						  <td><a href="/propuestas/id">Ver</a></td>
+					  </tr>
+            {% endfor %}
+				  </tbody>
+			  </table>
+		  </div>
+	  </section>
+    
+  </div>
+</div>
 {% endblock %}

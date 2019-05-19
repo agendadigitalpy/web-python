@@ -9,10 +9,61 @@
 	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
 
-<title>AgendaDigitalPy</title>
+<!-- <title>AgendaDigitalPy</title> -->
+
+<body class="is-preload">
+	<div id="wrapper">
+		<header id="header">
+			<div class="inner">
+				<a href="/" class="logo">
+					<span class="symbol">
+						<img src="assets/images/logo.png" />
+					</span>
+					<span class="title">#AgendaDigital</span>
+				</a>
+
+				<nav>
+					<ul>
+						<li><a href="#menu">Menu</a></li>
+					</ul>
+				</nav>
+
+			</div>
+		</header>
+
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<li><a href="/">Inicio</a></li>
+				<li><a href="/propuestas">Propuestas</a></li>
+				<li><a href="/documentacion">Documentación</a></li>
+				<li><a href="/seguimiento">Seguimiento</a></li>
+				<li><a href="/solicitudes">Solicitudes de información</a></li>
+				<li><a href="/gobierno-digital">Componente 1: Gobierno Digital</a></li>
+				<li><a href="/economia-digital">Componente 2: Economía Digital</a></li>
+				<li><a href="/conectividad">Componente 3: Conectividad</a></li>
+				<li><a href="/fortalecimiento-institucional">Componente 4: Fortalecimiento Institucional</a></li>
+			</ul>
+		</nav>
 
 <div class=page>
-  <h1>AgendaDigitalPy</h1>
   
   {% block body %}{% endblock %}
 </div>
+{% include "footer.html"  %}
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139964338-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-139964338-1');
+	</script>
+
+</body>
