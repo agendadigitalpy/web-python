@@ -75,9 +75,9 @@ def remove_html(s):
 def getConectividad():
 	return render_template("conectividad.html")
 
-@app.route('/documentación')
+@app.route('/documentacion')
 def getDocumentacion():
-	return render_template("documentación.html")
+	return render_template("documentacion.html")
 
 @app.route('/economia-digital')
 def getEconomia_Digital():
