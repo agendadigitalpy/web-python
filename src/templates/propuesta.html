@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="inner">
+    <section>
+        <a href="/propuestas">Volver a la lista de propuestas</a>
+    </section>
+    <header>
+        <h1>Propuesta: "{{ .p.Title }}"</h1>
+        <div class="proposal_details">
+            <p><b>Autor:</b> {{ .p.Name }}</p>
+            <p><b>Componente:</b> <a href="{{ .p.CategoryLink }}">{{ .p.Category }}</a></p>
+            <p><b>Fecha:</b> {{ .p.Date }}</p>
+        </div>
+        <hr />
+        <div class="proposal_content">
+            {{ .p.Content }}
+        </div>
+        <hr />
+    </header>
+    <section>
+            <div id="disqus_thread"></div>
+            <script>
+            var disqus_config = function () {
+            this.page.url = 'https://www.agendadigital.com.py/propuestas/{{ .p.ID }}';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = '{{ .p.ID }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://agendadigitalpy.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                                        
+    </section>
+</div>
+{% endblock %}
