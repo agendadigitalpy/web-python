@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="inner">
+    <header>
+        <h3>Solicitudes de información pública enviadas a MITIC</h3>
+    </header>
+    <section>
+        <div class="table-wrapper">
+            <table class="alt">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Asunto</th>
+                        <th>Respondida</th>
+                        <th>Enlace</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range .reqs }}
+                    <tr>
+                        <td>{{ .Date }}</td>
+                        <td>{{ .Title }}</td>
+                        <td>
+                        {{ if .Replied }}
+                        Sí
+                        {{ else }}
+                        No (faltan {{ .RemainingDays }} dias)
+                        {{ end }}
+                        </td>
+                        <td><a target="_blank" href="http://informacionpublica.paraguay.gov.py/portal/#!/ciudadano/solicitud/{{ .ID }}">Ver</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section>
+        <p><a href="/" class="button icon fa-home">Volver al inicio</a></p>
+    </section>
+</div>
+{% endblock %}

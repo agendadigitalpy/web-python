@@ -20,21 +20,46 @@ mongo = PyMongo(app)
 
 @app.route('/assets/<path:path>')
 def send_assets(path):
-        return send_from_directory('assets', path)
+	return send_from_directory('assets', path)
 
 @app.route('/')
 def index():
-    return '<html><body><h1>AgendaDigital Py</h1></body></html>'
-
-
+	return render_template('principal.html')
+	
 @app.route('/propuestas')
 def getProps():
-    propuestas = mongo.db.proposals.find()
-    
-    return render_template("propuestas.html", propuestas=propuestas)
+	propuestas = mongo.db.proposals.find()
+	return render_template("propuestas.html", propuestas=propuestas)
 
-    
-    
-    
+@app.route('/conectividad')
+def getConectividad():
+	return render_template("conectividad.html")
+
+@app.route('/documentación')
+def getDocumentacion():
+	return render_template("documentación.html")
+
+@app.route('/economia-digital')
+def getEconomia_Digital():
+	return render_template("economia-digital.html")
+
+@app.route('/fortalecimiento-institucional')
+def getFortalecimieto_digital():
+	return render_template("fortalecimiento-institucional.html")
+
+@app.route('/gobierno-digital')
+def getGobierno_digital():
+	return render_template("gobierno-digital.html")
+
+@app.route('/seguimiento')
+def getSeguimiento():
+	return render_template("seguimiento.html")
+
+@app.route('/solicitudes')
+def getSolicitudes():
+	return render_template("solicitudes.html")
+
+
+
 if __name__ == '__main__':
-          app.run(debug = True)
+	app.run(debug = True)
