@@ -2,7 +2,7 @@
 {% block title %} - Propuestas{% endblock %}
 {% block body %}
 <div class="inner">
-    {% if success is defined %}
+    {% if message.success == True %}
     <p class="flash-success">
         <b>¡Gracias por tu aporte, será publicado en breve!</b>
         <br/>
@@ -10,54 +10,11 @@
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </p>
     {% else %}
-    <p class="flash-success"><b>Ha ocurrido un error</b></p>
+    <p class="flash-success"><b>{{ message.text }}</b></p>
     {% endif %}
 
-    <header>
-        <h1>Creá tu propuesta<br /></h1>
-        <p>También podes incluir consultas puntuales sobre los distintos componentes del programa. En el caso de que necesites adjuntar más información, es posible agregar enlaces.</p>
-        <p>Haremos lo posible para consultar a las autoridades y mantenerte al tanto.</p>
-        <p>Tu dirección de correo no se publicará y se almacenará con el propósito de seguimiento.</p>
-    </header>
-
-    <section>
-        <form method="post" action="/propuestas">
-            <div class="row gtr-uniform">
-                <div class="col-6 col-12-xsmall">
-                    <input type="text" name="name" value="" placeholder="Nombre" required>
-                </div>
-                <div class="col-6 col-12-xsmall">
-                    <input type="email" name="email" value="" placeholder="Correo Electrónico" required>
-                </div>
-                <div class="col-12">
-                    <label for="category">Seleccioná un componente</label>
-                    <select name="category">
-                        <option value="0">General / Sin componente específico</option>
-                        <option value="1">1 - Gobierno Digital</option>
-                        <option value="2">2 - Economía Digital</option>
-                        <option value="3">3 - Conectividad</option>
-                        <option value="4">4 - Fortalecimiento Institucional</option>
-                    </select>
-                </div>
-                <div class="col-12">
-                    <input type="text" name="title" value="" placeholder="Título de tu propuesta, ejemplo: Sugerencia para el producto 15" required>
-                </div>
-                <div class="col-12">
-                    <div class="textarea-wrapper">
-                        <textarea name="content" placeholder="Escribí aquí tu propuesta" rows="3" style="overflow: hidden; resize: none; height: 79px;" required></textarea>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <ul class="actions">
-                        <li>
-                            <input type="submit" value="Enviar" class="primary">
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </form>
-    </section>
-
+    {% include "propuestaform.html" %}
+    
     <section>
         <h3>Últimas propuestas recibidas</h3>
         <div class="table-wrapper">
