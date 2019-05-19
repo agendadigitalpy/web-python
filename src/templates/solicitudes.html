@@ -17,18 +17,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{ range .reqs }}
                     <tr>
-                        <td>{{ .Date }}</td>
-                        <td>{{ .Title }}</td>
-                        <td>
-                        {{ if .Replied }}
-                        Sí
-                        {{ else }}
-                        No (faltan {{ .RemainingDays }} dias)
-                        {{ end }}
-                        </td>
-                        <td><a target="_blank" href="http://informacionpublica.paraguay.gov.py/portal/#!/ciudadano/solicitud/{{ .ID }}">Ver</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><a target="_blank" href="">Ver</td>
                     </tr>
                     {{ end }}
                 </tbody>
