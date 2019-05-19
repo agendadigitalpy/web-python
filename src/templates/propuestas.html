@@ -3,6 +3,7 @@
 {% block body %}
 <div class="inner">
     {% if success is defined %}
+    {% if success %}
     <p class="flash-success">
         <b>¡Gracias por tu aporte, será publicado en breve!</b>
         <br/>
@@ -11,6 +12,7 @@
     </p>
     {% else %}
     <p class="flash-success"><b>Ha ocurrido un error</b></p>
+    {% endif %}
     {% endif %}
 
     <header>
@@ -23,34 +25,29 @@
     <section>
         <form method="post" action="/propuestas">
             <div class="row gtr-uniform">
+                {{ form.hidden_tag() }}
                 <div class="col-6 col-12-xsmall">
-                    <input type="text" name="name" value="" placeholder="Nombre" required>
+                    {{ form.name(placeholder=form.name.description) }}
                 </div>
                 <div class="col-6 col-12-xsmall">
-                    <input type="email" name="email" value="" placeholder="Correo Electrónico" required>
+                    {{ form.email(placeholder=form.email.description) }}
                 </div>
                 <div class="col-12">
-                    <label for="category">Seleccioná un componente</label>
-                    <select name="category">
-                        <option value="0">General / Sin componente específico</option>
-                        <option value="1">1 - Gobierno Digital</option>
-                        <option value="2">2 - Economía Digital</option>
-                        <option value="3">3 - Conectividad</option>
-                        <option value="4">4 - Fortalecimiento Institucional</option>
-                    </select>
+                    {{ form.category.label }}
+                    {{ form.category(placeholder=form.category.description) }}
                 </div>
                 <div class="col-12">
-                    <input type="text" name="title" value="" placeholder="Título de tu propuesta, ejemplo: Sugerencia para el producto 15" required>
+                    {{ form.title(placeholder=form.title.description) }}
                 </div>
                 <div class="col-12">
                     <div class="textarea-wrapper">
-                        <textarea name="content" placeholder="Escribí aquí tu propuesta" rows="3" style="overflow: hidden; resize: none; height: 79px;" required></textarea>
+                        {{ form.content(placeholder=form.content.description) }}
                     </div>
                 </div>
                 <div class="col-12">
                     <ul class="actions">
                         <li>
-                            <input type="submit" value="Enviar" class="primary">
+                            {{ form.submit }}
                         </li>
                     </ul>
                 </div>

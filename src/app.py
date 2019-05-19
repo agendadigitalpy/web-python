@@ -3,11 +3,13 @@ from flask import Flask, request, render_template, send_from_directory
 from flask import Response
 from flask_pymongo import PyMongo, ASCENDING, DESCENDING
 from bson.objectid import ObjectId
+from forms import ProposalForm
 
 from bs4 import BeautifulSoup
 
 
 app = Flask(__name__,  static_url_path='')
+app.secret_key = 'top secret'
 
 app.config["MONGO_URI"] = "mongodb://localhost:27017/agendadigitalpy"
 mongo = PyMongo(app)
@@ -18,7 +20,7 @@ def send_assets(path):
 
 @app.route('/')
 def index():
-	return render_template('principal.html')
+    return render_template('principal.html')
 	
 
 @app.route("/propuestas/<_id>")
@@ -26,25 +28,50 @@ def show_proposal(_id):
     proposal = mongo.db.proposals.find_one({'_id': ObjectId(_id)})
     return render_template("propuesta.html", proposal=proposal)
 
-@app.route('/propuestas', methods = ['GET'])
+@app.route('/propuestas', methods = ['POST','GET'])
 def getProps():
-	proposals = mongo.db.proposals.find().sort('_id', DESCENDING)
-	return render_template("propuestas.html", proposals=proposals)
+    form = ProposalForm(request.form)
+    if request.method == 'POST' and form.validate():
+        try:
+                category = int(form.category.data)
+                if category > 4:
+                        category = 0
+        except ValueError:
+                category = 0
+
+        title = form.title.data
+        content = form.content.data
+        p = {
+                'name': form.name.data,
+                'email': form.email.data,
+                'category': category,
+                'title': form.title.data,
+                'content': form.content.data,
+                'approved': True
+            }
+        mongo.db.proposals.insert(p)
+        proposals = mongo.db.proposals.find().sort('_id', DESCENDING)
+        return render_template("propuestas.html", proposals=proposals, form=form, success=True)
+
+    proposals = mongo.db.proposals.find().sort('_id', DESCENDING)
+    return render_template("propuestas.html", proposals=proposals, form=form)
 
 # TODO: validar e-mail
-@app.route('/propuestas', methods = ['POST'])
+"""@app.route('/propuestas', methods = ['POST'])
 def createProposal():
-        name = remove_html(request.form["name"])
-        email = remove_html(request.form["email"])
-        category = request.form["category"]
+    if form.validate():
+        name = form.name.data
+        email = form.email.data
+        category = form.category.data
         try:
                 category = int(category)
                 if category > 4:
                         category = 0
         except ValueError:
                 category = 0
-        title = remove_html(request.form["title"])
-        content = remove_html(request.form["content"])
+
+        title = form.title.data
+        content = form.content.data
         p = {
                 'name': name,
                 'email': email,
@@ -52,11 +79,11 @@ def createProposal():
                 'title': title,
                 'content': content,
                 'approved': True
-        }
+            }
         mongo.db.proposals.insert(p)
         proposals = mongo.db.proposals.find().sort('_id', DESCENDING)
         return render_template("propuestas.html", proposals=proposals, success=True)
-
+"""
 def remove_html(s):
         soup = BeautifulSoup(s)
         return soup.get_text()
