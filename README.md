@@ -6,27 +6,17 @@ Si tenés alguna sugerencia relacionada con este proyecto, podes crear un ticket
 
 # Requisitos
 
-* [Python 3](https://www.python.org/downloads/)
-* [MongoDB](https://www.mongodb.com/)
+- [Python 3](https://www.python.org/downloads/)
+- [MongoDB](https://www.mongodb.com/)
 
 # Requisitos (Python)
 
-* [Flask](http://flask.pocoo.org/):
+- [Flask](http://flask.pocoo.org/)
+- [Flask-PyMongo](https://flask-pymongo.readthedocs.io/en/latest/)
+- [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
 
 ```bash
-$ pip install flask
-```
-
-* [Flask-PyMongo](https://flask-pymongo.readthedocs.io/en/latest/):
-
-```bash
-$ pip install Flask-PyMongo
-```
-
-* [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/):
-
-```bash
-$ pip install bs4
+$ pip install -r requirements.txt
 ```
 
 # Desarrollo
@@ -48,6 +38,39 @@ $ ./venv/bin/activate
 ```bash
 $ cd src
 $ flask run
+```
+
+## Guía de instalación para macos
+
+```bash
+$ python3 -m venv venv
+
+$ source venv/bin/activate
+
+$ pip install -r requirements.txt
+
+$ cd src
+
+$ export FLASK_APP=app.py
+# ejecutar flask en debug mode
+$ export FLASK_ENV=development
+
+$ flask run
+```
+
+en **macos** al correr `flask run` es muy común el error
+
+```bash
+ModuleNotFoundError: No module named 'bs4'
+```
+
+el fix es:
+
+```bash
+# salir del virtualenv
+deactivate
+# instalar manualmente
+python3 -m pip install bs4
 ```
 
 # Comunidad
