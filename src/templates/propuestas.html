@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul >
+  {% for p in propuestas %}
+    <li><h2>{{ p.name }}</h2>{{ p.email }}
+    <li><h4>Titulo</h4>{{ p.title }}
+    <div>
+    <li><h4>Contenido</h4>
+      <p>{{ p.content }}<p/>
+   </div>
+  {% else %}
+    <li><em>No se encontraron propuestas.</em>
+  {% endfor %}
+  </ul>
+{% endblock %}
