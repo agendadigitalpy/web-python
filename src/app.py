@@ -1,5 +1,5 @@
 
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, flash, request, render_template, send_from_directory, redirect, url_for
 from flask import Response
 from flask_pymongo import PyMongo, ASCENDING, DESCENDING
 from bson.objectid import ObjectId
@@ -31,7 +31,8 @@ def show_proposal(_id):
 @app.route('/propuestas', methods = ['POST','GET'])
 def getProps():
     form = ProposalForm(request.form)
-    if request.method == 'POST' and form.validate():
+    
+    if request.method == 'POST' and form.validate_on_submit():
         try:
                 category = int(form.category.data)
                 if category > 4:
@@ -51,7 +52,10 @@ def getProps():
             }
         mongo.db.proposals.insert(p)
         proposals = mongo.db.proposals.find().sort('_id', DESCENDING)
-        return render_template("propuestas.html", proposals=proposals, form=form, success=True)
+        
+        flash(u'ok')
+        return redirect(url_for('getProps'))
+        #return render_template("propuestas.html", proposals=proposals, form=form, success=True)
 
     proposals = mongo.db.proposals.find().sort('_id', DESCENDING)
     return render_template("propuestas.html", proposals=proposals, form=form)

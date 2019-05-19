@@ -2,7 +2,6 @@ from flask_wtf import Form
 from wtforms import TextField, IntegerField, TextAreaField, SubmitField, RadioField, SelectField
 from wtforms.fields.html5 import EmailField
 from wtforms import validators, ValidationError
-from werkzeug.datastructures import MultiDict
 
 class ProposalForm(Form):
 	name = TextField('Nombre',[validators.Required("Por favor ingresa tu nombre")], description="Nombre")

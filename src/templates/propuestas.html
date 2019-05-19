@@ -2,8 +2,10 @@
 {% block title %} - Propuestas{% endblock %}
 {% block body %}
 <div class="inner">
-    {% if success is defined %}
-    {% if success %}
+    {% with oks = get_flashed_messages() %}
+    {% if oks %}
+    {%- for ok in oks %}
+    {% if ok == "ok" %}
     <p class="flash-success">
         <b>¡Gracias por tu aporte, será publicado en breve!</b>
         <br/>
@@ -13,7 +15,9 @@
     {% else %}
     <p class="flash-success"><b>Ha ocurrido un error</b></p>
     {% endif %}
+    {% endfor -%}
     {% endif %}
+    {% endwith %}
 
     <header>
         <h1>Creá tu propuesta<br /></h1>

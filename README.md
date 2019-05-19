@@ -23,6 +23,18 @@ $ pip install flask
 $ pip install Flask-PyMongo
 ```
 
+* [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/):
+
+```bash
+$ pip install bs4
+```
+
+* [Flask-WTF](https://flask-wtf.readthedocs.io/en/stable/):
+
+```bash
+$ pip3 intall Flask-WTF
+```
+
 # Desarrollo
 
 Antes de utilizar la aplicación, crear una base de datos en MongoDB, llamada "agendadigitalpy".
