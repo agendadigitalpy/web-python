@@ -1,7 +1,7 @@
 # web-python
 
 # Para desarrollo crear el Entorno Virtual.
-# python -m venv venv
+ python -m venv venv
 # activar el entorno virtual 
 . venv/bin/activate
 # Instalar flask
