@@ -1,4 +1,5 @@
 
+from email.utils import parseaddr
 from flask import Flask, request, render_template, send_from_directory
 from flask import Response
 from flask_pymongo import PyMongo, ASCENDING, DESCENDING
@@ -53,9 +54,18 @@ def createProposal():
                 'content': content,
                 'approved': True
         }
-        mongo.db.proposals.insert(p)
+
+        msg = {}
+        if len(parseaddr(p["email"][1])) == 0 :
+                msg["text"] =  "Email invalido."
+                msg["success"] = False
+        else:
+                msg["success"] = True
+                mongo.db.proposals.insert(p)
+
         proposals = mongo.db.proposals.find().sort('_id', DESCENDING)
-        return render_template("propuestas.html", proposals=proposals, success=True)
+        return render_template("propuestas.html", proposals=proposals, message=msg)
+
 
 def remove_html(s):
         soup = BeautifulSoup(s)

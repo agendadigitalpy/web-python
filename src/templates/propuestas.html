@@ -2,7 +2,7 @@
 {% block title %} - Propuestas{% endblock %}
 {% block body %}
 <div class="inner">
-    {% if success is defined %}
+    {% if message.success == True %}
     <p class="flash-success">
         <b>¡Gracias por tu aporte, será publicado en breve!</b>
         <br/>
@@ -10,7 +10,7 @@
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </p>
     {% else %}
-    <p class="flash-success"><b>Ha ocurrido un error</b></p>
+    <p class="flash-success"><b>{{ message.text }}</b></p>
     {% endif %}
 
     <header>
