@@ -17,20 +17,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{ range .reqs }}
+                     {% for s in solicitudes %}
                     <tr>
-                        <td>{{ .Date }}</td>
-                        <td>{{ .Title }}</td>
+                        <td>{{ s._id | proposal_date }}</td>
+                        <td>{{ s.subject }}</td>
                         <td>
-                        {{ if .Replied }}
-                        Sí
-                        {{ else }}
-                        No (faltan {{ .RemainingDays }} dias)
-                        {{ end }}
+                            {% if s.replied %}
+                            Si
+                            {% else %}
+                            No (faltan {{s.remaining_days}}) 
+                            {% endif %}
                         </td>
-                        <td><a target="_blank" href="http://informacionpublica.paraguay.gov.py/portal/#!/ciudadano/solicitud/{{ .ID }}">Ver</td>
+                        <td><a target="_blank" href="http://informacionpublica.paraguay.gov.py/portal/#!/ciudadano/solicitud/{{ s.id }}">Ver</td>
                     </tr>
-                    {{ end }}
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

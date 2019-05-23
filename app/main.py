@@ -108,7 +108,8 @@ def getSeguimiento():
 
 @app.route('/solicitudes')
 def getSolicitudes():
-    return render_template("solicitudes.html")
+    solicitudes=mongo.db.solicitudes.find().sort('_id', DESCENDING)
+    return render_template("solicitudes.html", solicitudes=solicitudes)
 
 
 cats = ['General', 'Gobierno Digital', 'Economía Digital',
