@@ -108,6 +108,7 @@ def getSeguimiento():
 
 @app.route('/solicitudes')
 def getSolicitudes():
+    #no sabia si agregarle el campo date por eso le deje con la funcion proposal_date.
     solicitudes=mongo.db.solicitudes.find().sort('_id', DESCENDING)
     return render_template("solicitudes.html", solicitudes=solicitudes)
 
