@@ -40,7 +40,7 @@ $ cd src
 $ flask run
 ```
 
-## Guía de instalación para macos
+## Guía de instalación para macos o linux
 
 ```bash
 $ python3 -m venv venv
@@ -49,9 +49,9 @@ $ source venv/bin/activate
 
 $ pip install -r requirements.txt
 
-$ cd src
+$ cd app
 
-$ export FLASK_APP=app.py
+$ export FLASK_APP=main.py
 # ejecutar flask en debug mode
 $ export FLASK_ENV=development
 
