@@ -1,4 +1,6 @@
-<html>
+    {% extends "layout.html" %}
+    {% block title %}FAQ{% endblock %}
+    {% block body %}
     <div class="inner">
         <section class="documentacion">
             <header><h1>Documentaciones</h1></header>
@@ -74,8 +76,8 @@
             
             <blockquote>Actualización Julio, 2019: luego de 2 reuniones con el MITIC con mediación de la Unidad de Gestión de la Presidencia, presentamos nuestro plan de participación ciudadana a través de MESAS ABIERTAS a ser desarrolladas por un espacio de 6 meses. Aguardamos aprobación del MITIC y estamos en conversaciones con Gobierno Abierto para contar con su apoyo.</blockquote>
         </section>
-        <section class="irregularidades">
-            <header><h1>Irregularidades</h1></header>
+        <section class="encontramos">
+            <header><h1>¿Qué hemos encontrado?</h1></header>
             <ul>
                 <li>Hasta ahora 9 de julio de 2019, <!--no se como poner update date----> <strong>no hay documentación técnica</strong> que respalde el proyecto. Esto lo confirma <a href="http://bit.ly/EncuestaAgendaDigital">una encuesta con más de 300 personas de la comunidad</a> que estudiaron la documentación. Sólo hay presupuestos e insumos (encuestas, reportes, etc). Avanzar en estas condiciones sería como construir un edificio sin contar con planos.</li>
                 <li>Agenda Digital Incluía un proyecto de <strong>$400 mil dólares</strong> con la Agencia Espacial del Paraguay. Al ser consultada, <a href="https://twitter.com/mb_ins/status/1136208363753226246">la Agencia desconocia por completo el proyecto</a>. Luego de esta denuncia, MITIC lo eliminó de Agenda Digital.</li>
@@ -103,5 +105,11 @@
             <p><a href="https://twitter.com/OniriaTBWA/status/1136113106311098369">Oniria</a> aclaró que fueron $14.296,00.
             </p>
         </section>
+        <section class="mas">
+        <p>
+            <a href="/" class="button icon fa-home">Volver al inicio</a>
+            <a href="/propuestas" class="button icon fa-bullhorn">Ir a propuestas</a>
+        </p>
+    </section>
     </div>
-</html>
+{% endblock %}
