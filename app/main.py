@@ -85,6 +85,9 @@ def getConectividad():
 def getDocumentacion():
     return render_template("documentacion.html")
 
+@app.route('/preguntas-frecuentes')
+def getFaq():
+    return render_template("faq.html")
 
 @app.route('/economia-digital')
 def getEconomia_Digital():
