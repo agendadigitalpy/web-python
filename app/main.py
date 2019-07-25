@@ -103,6 +103,9 @@ def getFortalecimieto_digital():
 def getGobierno_digital():
     return render_template("gobierno-digital.html")
 
+@app.route('/objetivo-general')
+def getObjetivo_general():
+    return render_template("objetivo-general.html")
 
 @app.route('/seguimiento')
 def getSeguimiento():
